@@ -1,0 +1,87 @@
+<ion-grid fixed>
+  <ion-row class="ion-justify-content-around">
+    <ion-col class="ion-align-self-start" size="12">
+      <ion-button color="danger" size="small" (click)="CloseModal(false)"
+        >Cancel</ion-button
+      >
+    </ion-col>
+  </ion-row>
+
+  <ion-list style="padding: 10px">
+    <form [formGroup]="form">
+      <ion-item>
+        <ion-searchbar
+          placeholder="Search food"
+          debounce="500"
+          (ionChange)="SearchInput($event)"
+        ></ion-searchbar>
+      </ion-item>
+
+      <app-infinite-food-item-list
+        *ngIf="foodItems.length != 0"
+        [foodItems]="foodItems"
+        (selectedItemEvent)="SelectFoodItem($event)"
+      ></app-infinite-food-item-list>
+
+      <app-food-item-display
+        [foodItem]="selectedFoodItem"
+      ></app-food-item-display>
+
+      <ion-item>
+        <ion-label position="floating">Quantity</ion-label>
+        <ion-input formControlName="quantity" type="number"></ion-input>
+
+        <small
+          *ngIf="
+            !form.controls.quantity.valid &&
+            !(form.controls.quantity.value == undefined) &&
+            !form.controls.quantity.pristine
+          "
+        >
+          <p style="color: red">*Quantity must be a positive number</p>
+        </small>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Meal time</ion-label>
+        <ion-select
+          placeholder="Select meal"
+          interface="popover"
+          formControlName="meal"
+        >
+          <ion-select-option *ngFor="let meal of meals">{{
+            meal.replace("_", " ")
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </form>
+  </ion-list>
+
+  <ion-row
+    *ngIf="selectedFoodItem != undefined && form.controls.quantity.valid"
+  >
+    <ion-col>
+      <ion-card>
+        <ion-card-content>
+          Total calories: {{ ComputeTotalCalories() }} <br />
+          Total protein: {{ ComputeTotalProtein() }} <br />
+          Total carbohydrates: {{ ComputeTotalCarbohydrates() }} <br />
+          Total fats: {{ ComputeTotalFats() }}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button
+        [disabled]="
+          selectedFoodItem == undefined || !form.controls.quantity.valid
+        "
+        color="success"
+        style="display: block; margin-left: auto; margin-right: auto"
+        (click)="SaveFoodItemConsumed()"
+        >Save</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-grid>
