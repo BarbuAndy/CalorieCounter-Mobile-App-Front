@@ -1,0 +1,131 @@
+<ion-grid class="ion-no-margin">
+  <ion-row>
+    <ion-col size="2">
+      <app-top-menu></app-top-menu>
+    </ion-col>
+    <ion-col>
+      <app-diary-menu
+        (dateEventEmitter)="ChangeDateEvent($event)"
+        (refreshDiaryEmitter)="RefreshDiary($event)"
+        (addFoodEventEmitter)="AddFoodItemConsumed()"
+      ></app-diary-menu>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="meals.length != 0">
+    <ion-content style="height: 90vh">
+      <ion-col>
+        <div *ngFor="let meal of meals">
+          <ion-card>
+            <ion-card-header class="ion-no-padding">
+              <ion-grid class="ion-no-margin">
+                <ion-row>
+                  <ion-col size="3">{{ meal }}</ion-col>
+                  <ion-col size="3">
+                    Kcal: {{ ComputeTotalCaloriesPerMeal(meal) }}
+                  </ion-col>
+                  <ion-col size="2">
+                    P: {{ ComputeTotalProteinPerMeal(meal) }}
+                  </ion-col>
+                  <ion-col size="2">
+                    C: {{ ComputeTotalCarbohydratesPerMeal(meal) }}
+                  </ion-col>
+                  <ion-col size="2">
+                    F: {{ ComputeTotalFatsPerMeal(meal) }}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-header>
+            <ion-card-content style="padding-left: 0px !important">
+              <ion-list>
+                <ion-item
+                  class="ion-no-padding"
+                  *ngFor="let item of GetItemsIn(meal)"
+                  style="width: 100%; padding-left: 10px !important"
+                >
+                  <div style="width: 50%; max-height: 25px; overflow: scroll">
+                    {{ item.foodItem.name }}
+                  </div>
+                  <div
+                    style="
+                      width: 50%;
+                      display: flex;
+                      justify-content: space-around;
+                    "
+                  >
+                    <span>
+                      {{
+                        (item.foodItem.calories * item.quantity) / 100
+                          | number: "1.0-0"
+                      }}
+                    </span>
+                    <span style="color: var(--protein-red)">
+                      {{
+                        (item.foodItem.protein * item.quantity) / 100
+                          | number: "1.0-0"
+                      }}
+                    </span>
+                    <span style="color: var(--carbohydrate-blue)">
+                      {{
+                        (item.foodItem.carbohydrates * item.quantity) / 100
+                          | number: "1.0-0"
+                      }}
+                    </span>
+                    <span style="color: var(--fat-yellow)">
+                      {{
+                        (item.foodItem.fats * item.quantity) / 100
+                          | number: "1.0-0"
+                      }}
+                    </span>
+                  </div>
+                  <div style="display: inherit">
+                    <ion-fab-button
+                      (click)="EditFoodItemConsumed(item)"
+                      size="small"
+                      style="
+                        height: 30px;
+                        margin: 0px !important;
+                        margin-right: 10px !important;
+                      "
+                    >
+                      <ion-icon
+                        name="create-outline"
+                        style="width: 20px; height: 20px"
+                      ></ion-icon>
+                    </ion-fab-button>
+                    <ion-fab-button
+                      (click)="DeleteFoodItemEaten(item)"
+                      color="danger"
+                      size="small"
+                      style="height: 30px; margin: 0px !important"
+                    >
+                      <ion-icon
+                        name="trash-outline"
+                        style="width: 20px; height: 20px"
+                      ></ion-icon>
+                    </ion-fab-button>
+                  </div>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-content>
+  </ion-row>
+  <div *ngIf="meals.length == 0">
+    <ion-row style="padding-top: 100px">
+      <ion-col>
+        <ion-title>Nothing eaten for today</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row style="padding-top: 50px">
+      <ion-col>
+        <ion-button
+          style="display: block; margin-left: auto; margin-right: auto"
+          (click)="AddFoodItemConsumed()"
+          >Add food</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-grid>

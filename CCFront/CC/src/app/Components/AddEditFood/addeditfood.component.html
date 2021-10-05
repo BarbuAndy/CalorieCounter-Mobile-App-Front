@@ -1,0 +1,58 @@
+<app-top-menu></app-top-menu>
+
+<ion-list style="padding: 5px">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Food name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Kcalories</ion-label>
+      <ion-input formControlName="calories" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Protein</ion-label>
+      <ion-input formControlName="protein" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Carbohydrates</ion-label>
+      <ion-input formControlName="carbohydrates" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fats</ion-label>
+      <ion-input formControlName="fats" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Note</ion-label>
+      <ion-input formControlName="note"></ion-input>
+    </ion-item>
+
+    <ion-button
+      style="
+        display: block;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 10px;
+      "
+      (click)="AddFoodSugestion()"
+      >Submit Suggestion</ion-button
+    >
+  </form>
+
+  <ion-button
+    *ngIf="isAdminCheck == true"
+    style="
+      display: block;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: 5px;
+    "
+    (click)="AddFood()"
+    >Add Food</ion-button
+  >
+</ion-list>
