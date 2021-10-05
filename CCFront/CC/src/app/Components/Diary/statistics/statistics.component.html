@@ -1,0 +1,100 @@
+<ion-grid style="width: 100%">
+  <ion-row>
+    <ion-col class="ion-align-self-start">
+      <ion-button color="danger" size="small" (click)="CloseModal()"
+        >Cancel</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <br /><br />
+  <ion-row>
+    <ion-col style="display: flex; align-items: center; justify-content: center"
+      >From:
+      <ion-datetime
+        style="padding: 3px 0px 0px 5px !important"
+        value="{{ minDate.toString() }}"
+        display-timezone="utc"
+        displayFormat="DD MMM"
+        (ionChange)="UpdateMinDate($event)"
+      ></ion-datetime>
+    </ion-col>
+    <ion-col style="display: flex; align-items: center; justify-content: center"
+      >To:
+      <ion-datetime
+        style="padding: 3px 0px 0px 5px !important"
+        value="{{ maxDate.toString() }}"
+        display-timezone="utc"
+        displayFormat="DD MMM"
+        (ionChange)="UpdateMaxDate($event)"
+      ></ion-datetime>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-button
+        style="display: block; margin-left: auto; margin-right: auto"
+        (click)="GetStatistics()"
+        >Get statistics</ion-button
+      >
+    </ion-col>
+  </ion-row>
+  <ion-row style="height: 75vh">
+    <ion-col>
+      <ion-content>
+        <ion-virtual-scroll [items]="statisticsData">
+          <ion-item *virtualItem="let item" class="ion-no-padding">
+            <ion-card style="width: 100%; margin: 10px">
+              <ion-card-header>{{
+                item.date | date: "dd LLL"
+              }}</ion-card-header>
+              <ion-card-content>
+                <div>
+                  <span>
+                    <b>Daily totals</b> <br />
+                    Total Calories:{{ item.totalCalories | number: "1.0-0"
+                    }}<br />
+                    Total Protein:{{ item.totalProtein | number: "1.0-0"
+                    }}<br />
+                    Total Carbohydrates:{{
+                      item.totalCarbohydrate | number: "1.0-0"
+                    }}
+                    <br />
+                    Total Fats:{{ item.totalFat | number: "1.0-0" }} <br />
+                  </span>
+                  <span style="float: right" *ngIf="item.totalCalories != 0">
+                    <canvas
+                      #pieChart
+                      style="width: 40vw !important; height: 40vh !important"
+                    ></canvas>
+                  </span>
+                </div>
+                <!--  -->
+                <div>
+                  <span *ngFor="let meal of item.meals">
+                    <div>
+                      <b>{{ meal.name }} </b><br />
+                      Calories:{{ meal.calories | number: "1.0-0" }}<br />
+                      Protein:{{ meal.protein | number: "1.0-0" }}<br />
+                      Carbohydrates:{{ meal.carbohydrates | number: "1.0-0" }}
+                      <br />
+                      Fats:{{ meal.fats | number: "1.0-0" }} <br />
+                    </div>
+                  </span>
+                  <span
+                    style="float: right; padding-top: 5px"
+                    *ngIf="item.totalCalories != 0"
+                  >
+                    <canvas
+                      #lineChart
+                      style="width: 80vw !important; height: 30vh !important"
+                    ></canvas>
+                  </span>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+        </ion-virtual-scroll>
+      </ion-content>
+    </ion-col>
+  </ion-row>
+</ion-grid>
