@@ -1,0 +1,124 @@
+<div style="padding: 10%">
+  <!-- REGISTER -->
+  <div *ngIf="mode == ACCOUNTSCREENMODE.Register">
+    <ion-header>Register</ion-header>
+    <ion-list style="padding: 5px">
+      <form [formGroup]="registerForm">
+        <ion-item>
+          <ion-label position="floating">First Name</ion-label>
+          <ion-input formControlName="firstName"></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !registerForm.controls.firstName.valid &&
+            registerForm.controls.firstName.touched
+          "
+        >
+          <p style="color: red">*First name cannot be empty</p>
+        </small>
+        <ion-item>
+          <ion-label position="floating">Last Name</ion-label>
+          <ion-input formControlName="lastName"></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !registerForm.controls.lastName.valid &&
+            registerForm.controls.lastName.touched
+          "
+        >
+          <p style="color: red">*Last name cannot be empty</p>
+        </small>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !registerForm.controls.email.valid &&
+            registerForm.controls.email.touched
+          "
+        >
+          <p style="color: red">*Enter a valid email address</p>
+        </small>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !registerForm.controls.password.valid &&
+            registerForm.controls.password.touched
+          "
+        >
+          <p style="color: red">*Password cannot be empty</p>
+        </small>
+        <ion-item>
+          <ion-label position="floating">Repeat Password</ion-label>
+          <ion-input
+            formControlName="repeatPassword"
+            type="password"
+          ></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !registerForm.controls.repeatPassword.valid &&
+            registerForm.controls.repeatPassword.touched
+          "
+        >
+          <p style="color: red">*Password cannot be empty</p>
+        </small>
+      </form>
+    </ion-list>
+
+    <ion-button
+      style="display: block; margin-left: auto; margin-right: auto"
+      (click)="Register()"
+      >{{ ACCOUNTSCREENMODE[mode] }}</ion-button
+    >
+  </div>
+
+  <!-- LOGIN -->
+  <div *ngIf="mode == ACCOUNTSCREENMODE.Login">
+    <ion-header>Login</ion-header>
+    <ion-list style="padding: 5px">
+      <form [formGroup]="loginForm">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email"></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !loginForm.controls.email.valid && loginForm.controls.email.touched
+          "
+        >
+          <p style="color: red">*Enter a valid email address</p>
+        </small>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <small
+          *ngIf="
+            !loginForm.controls.password.valid &&
+            loginForm.controls.password.touched
+          "
+        >
+          <p style="color: red">*Password cannot be empty</p>
+        </small>
+      </form>
+    </ion-list>
+
+    <ion-button
+      style="display: block; margin-left: auto; margin-right: auto"
+      (click)="Login()"
+      >{{ ACCOUNTSCREENMODE[mode] }}</ion-button
+    >
+  </div>
+
+  <!-- switch mode -->
+  <ion-button
+    style="display: block; margin-left: auto; margin-right: auto"
+    (click)="switchMode()"
+    >Go to {{ ACCOUNTSCREENMODE[GetReversedMode(mode)] }}</ion-button
+  >
+</div>

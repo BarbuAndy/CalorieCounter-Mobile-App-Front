@@ -1,0 +1,51 @@
+<app-top-menu></app-top-menu>
+
+<div style="padding: 10%">
+  <ion-header>Change accout information</ion-header>
+  <ion-list style="padding: 5px">
+    <form [formGroup]="form">
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
+      <small
+        *ngIf="
+          !form.controls.firstName.valid && form.controls.firstName.touched
+        "
+      >
+        <p style="color: red">*First name cannot be empty</p>
+      </small>
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
+      <small
+        *ngIf="!form.controls.lastName.valid && form.controls.lastName.touched"
+      >
+        <p style="color: red">*Last name cannot be empty</p>
+      </small>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <small *ngIf="!form.controls.email.valid && form.controls.email.touched">
+        <p style="color: red">*Enter a valid email address</p>
+      </small>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Repeat Password</ion-label>
+        <ion-input formControlName="repeatPassword" type="password"></ion-input>
+      </ion-item>
+    </form>
+  </ion-list>
+
+  <ion-button
+    style="display: block; margin-left: auto; margin-right: auto"
+    (click)="UpdateUser()"
+    >Change Info</ion-button
+  >
+</div>
