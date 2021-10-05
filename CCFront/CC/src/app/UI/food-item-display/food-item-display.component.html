@@ -1,0 +1,22 @@
+<ion-grid
+  class="ion-no-padding"
+  *ngIf="foodItem != undefined"
+  style="padding-top: 10px"
+>
+  <ion-row>
+    <ion-col>{{ foodItem.name }} </ion-col>
+  </ion-row>
+  <ion-row style="max-width: 80vw">
+    <ion-col>Kcal: {{ foodItem.calories }} </ion-col>
+    <ion-col style="text-align: center">P: {{ foodItem.protein }} </ion-col>
+    <ion-col style="text-align: center">F: {{ foodItem.fats }} </ion-col>
+    <ion-col style="text-align: center"
+      >C: {{ foodItem.carbohydrates }}</ion-col
+    >
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <small>{{ foodItem.note }}</small>
+    </ion-col>
+  </ion-row>
+</ion-grid>

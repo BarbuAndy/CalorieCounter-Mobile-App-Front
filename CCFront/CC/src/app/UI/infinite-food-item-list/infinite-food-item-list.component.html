@@ -1,0 +1,35 @@
+<ion-content color="light" [style.height]="height">
+  <ion-list>
+    <ion-virtual-scroll [items]="foodItems">
+      <ion-item
+        *virtualItem="let item"
+        color="light"
+        (click)="EmitFoodItemSelected(item)"
+      >
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <app-food-item-display
+                [foodItem]="item"
+                style="width: 100%"
+              ></app-food-item-display>
+
+              <div *ngIf="approveRejectFunction">
+                <ion-button color="danger" (click)="EmitFoodItemRejected(item)"
+                  ><ion-icon name="close-outline"></ion-icon
+                ></ion-button>
+
+                <ion-button
+                  color="success"
+                  (click)="EmitFoodItemApproved(item)"
+                  style="float: right"
+                  ><ion-icon name="add-outline"></ion-icon
+                ></ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+  </ion-list>
+</ion-content>
