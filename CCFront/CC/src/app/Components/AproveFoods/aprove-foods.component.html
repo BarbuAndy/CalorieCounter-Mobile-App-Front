@@ -1,0 +1,12 @@
+<app-top-menu></app-top-menu>
+
+<div *ngIf="suggestedFoodItems.length != 0">
+  <app-infinite-food-item-list
+    [foodItems]="suggestedFoodItems"
+    [height]="'90vh'"
+    [approveRejectFunction]="true"
+    (aprovedItemEvent)="ApproveSuggestion($event)"
+    (rejectedItemEvent)="RejectSuggestion($event)"
+  ></app-infinite-food-item-list>
+</div>
+<div *ngIf="suggestedFoodItems.length == 0">No foods to approve</div>
