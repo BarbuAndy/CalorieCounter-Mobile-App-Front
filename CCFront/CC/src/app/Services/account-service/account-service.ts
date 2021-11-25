@@ -76,6 +76,13 @@ export class AccountService {
     return this.httpClient.put(this.api + '/update', account);
   }
 
+  UpdatePassword(updatePasswordModel) {
+    return this.httpClient.put(
+      this.api + '/updatePassword',
+      updatePasswordModel
+    );
+  }
+
   async GetToken() {
     return (await this.storageService.get('user'))['token'];
   }

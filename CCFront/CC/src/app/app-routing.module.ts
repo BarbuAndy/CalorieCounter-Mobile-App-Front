@@ -4,6 +4,7 @@ import { AccountComponent } from './Components/Account/account.component';
 import { AddeditfoodComponent } from './Components/AddEditFood/addeditfood.component';
 import { AproveFoodsComponent } from './Components/AproveFoods/aprove-foods.component';
 import { DiaryComponent } from './Components/Diary/diary.component';
+import { GoalsComponent } from './Components/goals/goals.component';
 import { RegisterLoginComponent } from './Components/RegisterLogin/registerlogin.component';
 import { SettingsComponent } from './Components/Settings/settings.component';
 import { LoginGuardService } from './Services/login-guard/login-guard.service';
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'RegisterLogin',
     component: RegisterLoginComponent,
+  },
+  {
+    path: 'Goals',
+    component: GoalsComponent,
+    canActivate: [LoginGuardService],
   },
 ];
 

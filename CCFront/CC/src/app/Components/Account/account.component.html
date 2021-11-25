@@ -1,7 +1,9 @@
 <app-top-menu></app-top-menu>
 
 <div style="padding: 10%">
-  <ion-header>Change accout information</ion-header>
+  <ion-header style="padding-bottom: 15px"
+    >Change accout information</ion-header
+  >
   <ion-list style="padding: 5px">
     <form [formGroup]="form">
       <ion-item>
@@ -35,11 +37,6 @@
         <ion-label position="floating">Password</ion-label>
         <ion-input formControlName="password" type="password"></ion-input>
       </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Repeat Password</ion-label>
-        <ion-input formControlName="repeatPassword" type="password"></ion-input>
-      </ion-item>
     </form>
   </ion-list>
 
@@ -47,5 +44,10 @@
     style="display: block; margin-left: auto; margin-right: auto"
     (click)="UpdateUser()"
     >Change Info</ion-button
+  >
+  <ion-button
+    style="display: block; margin-left: auto; margin-right: auto"
+    (click)="ChangePasswordPopup()"
+    >Change password</ion-button
   >
 </div>

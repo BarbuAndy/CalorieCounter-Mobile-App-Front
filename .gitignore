@@ -1,19 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# TGIC Files
+/src/assets/logon.html
+
 # compiled output
 /dist
 /tmp
 /out-tsc
-# Only exists if Bazel was run
-/bazel-out
 
 # dependencies
 /node_modules
-/CC/node_modules
-/CC/www
-
-# profiling files
-chrome-profiler-events*.json
 
 # IDEs and editors
 /.idea
@@ -30,7 +26,6 @@ chrome-profiler-events*.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
 # misc
 /.sass-cache
@@ -38,10 +33,18 @@ chrome-profiler-events*.json
 /coverage
 /libpeerconnection.log
 npm-debug.log
-yarn-error.log
 testem.log
 /typings
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+*.js
 
 # System Files
 .DS_Store
 Thumbs.db
+package-lock.json
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/

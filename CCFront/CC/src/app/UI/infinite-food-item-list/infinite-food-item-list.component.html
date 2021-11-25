@@ -5,8 +5,9 @@
         *virtualItem="let item"
         color="light"
         (click)="EmitFoodItemSelected(item)"
+        class="ion-no-padding"
       >
-        <ion-grid>
+        <ion-grid style="padding-left: 15px" [ngStyle]="GetItemStyle(item)">
           <ion-row>
             <ion-col>
               <app-food-item-display
@@ -15,13 +16,17 @@
               ></app-food-item-display>
 
               <div *ngIf="approveRejectFunction">
-                <ion-button color="danger" (click)="EmitFoodItemRejected(item)"
+                <ion-button
+                  color="danger"
+                  (click)="EmitFoodItemRejected(item)"
+                  [disabled]="item.status != FoodItemRejectionStatus.NotSet"
                   ><ion-icon name="close-outline"></ion-icon
                 ></ion-button>
 
                 <ion-button
                   color="success"
                   (click)="EmitFoodItemApproved(item)"
+                  [disabled]="item.status != FoodItemRejectionStatus.NotSet"
                   style="float: right"
                   ><ion-icon name="add-outline"></ion-icon
                 ></ion-button>

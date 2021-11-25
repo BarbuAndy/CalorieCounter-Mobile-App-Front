@@ -26,6 +26,8 @@ import { FoodItemDisplayComponent } from './UI/food-item-display/food-item-displ
 import { StatisticsComponent } from './Components/Diary/statistics/statistics.component';
 import { StatisticsService } from './Services/statistics-service/statistics.service';
 import { DatePipe } from '@angular/common';
+import { ChangePasswordComponent } from './Components/Account/ChangePasswordModal/change-password/change-password.component';
+import { GoalsComponent } from './Components/goals/goals.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { DatePipe } from '@angular/common';
     InfiniteFoodItemListComponent,
     FoodItemDisplayComponent,
     StatisticsComponent,
+    ChangePasswordComponent,
+    GoalsComponent,
   ],
   entryComponents: [],
   imports: [

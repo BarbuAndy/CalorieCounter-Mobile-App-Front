@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { Account, LoginInfo } from 'src/app/Models/AccountModels';
 import { AccountService } from 'src/app/Services/account-service/account-service';
 import { PopupService } from 'src/app/Services/popup-service/popup.service';
+import { ChangePasswordComponent } from './ChangePasswordModal/change-password/change-password.component';
 
 @Component({
   selector: 'app-account',
@@ -15,7 +17,8 @@ export class AccountComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private popupService: PopupService
+    private popupService: PopupService,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -29,7 +32,6 @@ export class AccountComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
       password: ['', Validators.required],
-      repeatPassword: ['', Validators.required],
       passwordHash: ['', Validators.required],
       role: ['', Validators.required],
     });
@@ -45,11 +47,7 @@ export class AccountComponent implements OnInit {
   }
 
   UpdateUser() {
-    if (
-      this.form.valid &&
-      this.form.controls.password.value ===
-        this.form.controls.repeatPassword.value
-    ) {
+    if (this.form.valid) {
       const account: Account = {
         userId: this.form.controls.userId.value,
         firstName: this.form.controls.firstName.value,
@@ -81,5 +79,12 @@ export class AccountComponent implements OnInit {
 
       this.form.markAllAsTouched();
     }
+  }
+
+  async ChangePasswordPopup() {
+    const modal = await this.modalController.create({
+      component: ChangePasswordComponent,
+    });
+    await modal.present();
   }
 }

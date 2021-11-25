@@ -34,12 +34,30 @@ export class AddeditfoodComponent implements OnInit {
 
   BuildForm() {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
-      calories: ['', Validators.required],
-      protein: ['', Validators.required],
-      carbohydrates: ['', Validators.required],
-      fats: ['', Validators.required],
-      note: ['', Validators.nullValidator],
+      name: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(30)]),
+      ],
+      calories: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(3)]),
+      ],
+      protein: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(3)]),
+      ],
+      carbohydrates: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(3)]),
+      ],
+      fats: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(3)]),
+      ],
+      note: [
+        '',
+        Validators.compose([Validators.required, Validators.maxLength(40)]),
+      ],
     });
   }
 

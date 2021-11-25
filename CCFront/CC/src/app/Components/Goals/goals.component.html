@@ -1,0 +1,66 @@
+<ion-grid class="ion-no-margin">
+  <ion-row>
+    <ion-col size="2">
+      <app-top-menu></app-top-menu>
+    </ion-col>
+    <ion-col offset="8" size="2">
+      <ion-button size="small" (click)="OnEditSave()">
+        {{ viewMode == ViewMode.View ? "Edit" : "Save" }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="padding-top: 25px; width: 90%">
+    <ion-col [formGroup]="form">
+      <ion-item>
+        <ion-label class="no-disable-grey">Weight: </ion-label>
+        <ion-input formControlName="weight" class="no-disable-grey"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="no-disable-grey">Activity level: </ion-label>
+        <ion-select
+          interface="popover"
+          formControlName="activityLevel"
+          class="no-disable-grey"
+        >
+          <ion-select-option *ngFor="let option of activityOptions">{{
+            option.description
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="no-disable-grey">Goal: </ion-label>
+        <ion-select
+          interface="popover"
+          formControlName="goal"
+          class="no-disable-grey"
+        >
+          <ion-select-option *ngFor="let option of goalOptions">{{
+            option.description
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label class="no-disable-grey">Preffered diet: </ion-label>
+        <ion-select
+          interface="popover"
+          formControlName="prefferedDiet"
+          class="no-disable-grey"
+        >
+          <ion-select-option *ngFor="let option of dietOptions">{{
+            option.description
+          }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <canvas
+      #weightChart
+      style="width: 80vw !important; height: 30vh !important"
+    ></canvas>
+  </ion-row>
+</ion-grid>

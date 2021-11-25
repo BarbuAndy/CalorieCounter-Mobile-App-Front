@@ -9,4 +9,8 @@
     (rejectedItemEvent)="RejectSuggestion($event)"
   ></app-infinite-food-item-list>
 </div>
-<div *ngIf="suggestedFoodItems.length == 0">No foods to approve</div>
+<div *ngIf="suggestedFoodItems.length == 0">
+  <ion-title style="overflow: visible; height: 40%">
+    No foods to approve
+  </ion-title>
+</div>
