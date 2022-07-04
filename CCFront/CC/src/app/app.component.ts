@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
       { title: 'Account', url: '/Account', icon: 'person' },
       { title: 'Diary', url: '/Diary', icon: 'book' },
       { title: 'Add Food', url: '/AddFood', icon: 'pizza' },
-      { title: 'Settings', url: '/Settings', icon: 'settings' },
     ];
 
     this.accoutService.isAdmin().then((rez) => {
@@ -36,6 +35,17 @@ export class AppComponent implements OnInit {
         });
       }
     });
+
+    this.accoutService.isAdmin().then((rez) => {
+      if (rez == true) {
+        this.appPages.push({
+          title: 'Settings',
+          url: '/Settings',
+          icon: 'settings',
+        });
+      }
+    });
+
   }
 
   Logout() {
