@@ -7,6 +7,7 @@ import { Account, LoginInfo } from 'src/app/Models/AccountModels';
 import { StorageService } from '../storage-service/storage.service';
 import { from } from 'rxjs';
 import { FoodItemConsumedService } from '../foodItemConsumed-service/food-item-consumed.service';
+import { PopupService } from '../popup-service/popup.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AccountService {
     private storageService: StorageService,
     private httpClient: HttpClient,
     private router: Router,
-    private menuController: MenuController
+    private menuController: MenuController,
+    private popupService: PopupService
   ) {}
 
   Login(loginInfo: LoginInfo) {
@@ -37,10 +39,10 @@ export class AccountService {
   Register(account: Account) {
     this.httpClient.post(this.api + '/register', account).subscribe(
       (res) => {
-        console.log('register OK');
+        this.popupService.SimplePopup('Success', 1000, 'success');
       },
       (error) => {
-        console.log(error.error);
+        this.popupService.SimplePopup('error', 2000, 'danger');
       }
     );
   }

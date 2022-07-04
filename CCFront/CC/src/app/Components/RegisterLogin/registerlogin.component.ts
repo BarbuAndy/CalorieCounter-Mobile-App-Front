@@ -87,6 +87,7 @@ export class RegisterLoginComponent implements OnInit {
       };
 
       this.accountService.Register(account);
+      this.switchMode();
     } else {
       this.registerForm.markAllAsTouched();
     }
