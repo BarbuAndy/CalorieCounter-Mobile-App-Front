@@ -12,11 +12,20 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.appPages = [
       { title: 'Account', url: '/Account', icon: 'person' },
-      { title: 'Goals', url: '/Goals', icon: 'accessibility' },
       { title: 'Diary', url: '/Diary', icon: 'book' },
       { title: 'Add Food', url: '/AddFood', icon: 'pizza' },
       { title: 'Settings', url: '/Settings', icon: 'settings' },
     ];
+
+    this.accoutService.isAdmin().then((rez) => {
+      if (rez == true) {
+        this.appPages.push({
+           title: 'Goals',
+           url: '/Goals',
+           icon: 'accessibility' 
+          });
+        }
+    });
 
     this.accoutService.isAdmin().then((rez) => {
       if (rez == true) {

@@ -41,7 +41,7 @@ export class GoalsComponent implements OnInit {
     this.DisableForm(true);
     this.autocompleteForm();
     this.initDropdows();
-    this.getGoalStatistics();
+    //this.getGoalStatistics();
   }
 
   initForm() {
@@ -116,11 +116,11 @@ export class GoalsComponent implements OnInit {
     );
   }
 
-  async getGoalStatistics() {
-    (await this.userDataService.getGoalStatistics()).subscribe((rez) => {},
-    error => {},
-    finally => {});
-  }
+  // async getGoalStatistics() {
+  //   (await this.userDataService.getGoalStatistics()).subscribe((rez) => {},
+  //   error => {},
+  //   finally => {});
+  // }
 
   drawWeightChart() {
     new Chart(this.lineChartsElementRef.nativeElement, {
